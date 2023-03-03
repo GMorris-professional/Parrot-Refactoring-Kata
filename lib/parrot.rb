@@ -1,7 +1,8 @@
 class Parrot
 
   class Type
-
+    def initialize
+    end
   end
 
   def initialize(type, number_of_coconuts, voltage, nailed)
