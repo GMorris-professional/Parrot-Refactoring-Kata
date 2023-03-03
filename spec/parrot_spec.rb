@@ -1,6 +1,6 @@
 require_relative '../lib/parrot'
 
-describe "Parrots" do
+RSpec.describe "Parrots" do
   it "gets speed of a European parrot" do
     parrot = Parrot.new(:european_parrot, 0, 0, false)
     expect(parrot.speed).to eq(12.0)
