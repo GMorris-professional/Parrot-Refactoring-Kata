@@ -2,21 +2,24 @@ class Parrot
 
   class Type
     def self.for(type)
+      new(type)
     end
 
-    def initialize
+    def initialize(type)
+      @type = type
     end
+    attr_reader :type
   end
 
   def initialize(type, number_of_coconuts, voltage, nailed)
-    @type = type
+    @type = Type.for(type)
     @number_of_coconuts = number_of_coconuts
     @voltage = voltage
     @nailed = nailed
   end
 
   def speed
-    case @type
+    case @type.type
     when :european_parrot
       return base_speed
     when :african_parrot
