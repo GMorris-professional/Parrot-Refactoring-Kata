@@ -1,47 +1,69 @@
 class Parrot
-
-  class Type
-    def self.for(type)
-      new(type)
-    end
-
-    def initialize(type)
-      @type = type
-    end
-    attr_reader :type
-  end
-
   def initialize(type, number_of_coconuts, voltage, nailed)
-    @type = Type.for(type)
-    @number_of_coconuts = number_of_coconuts
-    @voltage = voltage
-    @nailed = nailed
+    @type = Type.for(type, number_of_coconuts, voltage, nailed)
   end
 
   def speed
-    case @type.type
-    when :european_parrot
-      return base_speed
-    when :african_parrot
-      return [0, base_speed - load_factor * @number_of_coconuts].max
-    when :norwegian_blue_parrot
-      return (@nailed) ? 0 : compute_base_speed_for_voltage(@voltage)
+    @type.speed
+  end
+end
+
+class Type
+  class European < Type
+    def initialize
     end
 
-    throw "Should be unreachable!"
+    def speed
+      return base_speed
+    end
+
+    private
+      def base_speed
+        12.0
+      end
+  end
+  class African < Type
+    def initialize(number_of_coconuts)
+      @number_of_coconuts = number_of_coconuts
+    end
+
+    def speed
+      return [0, base_speed - load_factor * @number_of_coconuts].max
+    end
+
+    private
+      def base_speed
+        12.0
+      end
+
+      def load_factor
+        9.0
+      end
+  end
+  class NorwegianBlue < Type
+    def initialize(voltage, nailed)
+      @voltage = voltage
+      @nailed = nailed
+    end
+
+    def speed
+      return (@nailed) ? 0 : [24.0, @voltage * base_speed].min
+    end
+
+    private
+      def base_speed
+        12.0
+      end
   end
 
-  private
-
-  def compute_base_speed_for_voltage(voltage)
-    [24.0, voltage * base_speed].min
-  end
-
-  def load_factor
-    9.0
-  end
-
-  def base_speed
-    12.0
+  def self.for(type, number_of_coconuts, voltage, nailed)
+    case type
+    when :european_parrot
+      European.new()
+    when :african_parrot
+      African.new(number_of_coconuts)
+    when :norwegian_blue_parrot
+      NorwegianBlue.new(voltage, nailed)
+    end
   end
 end
