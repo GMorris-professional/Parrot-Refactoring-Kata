@@ -1,5 +1,9 @@
 class Parrot
 
+  class Type
+
+  end
+
   def initialize(type, number_of_coconuts, voltage, nailed)
     @type = type
     @number_of_coconuts = number_of_coconuts
