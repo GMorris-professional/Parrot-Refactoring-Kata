@@ -1,6 +1,9 @@
 class Parrot
 
   class Type
+    def self.for(type)
+    end
+
     def initialize
     end
   end
