@@ -1,6 +1,6 @@
 class Parrot
   def initialize(type, number_of_coconuts, voltage, nailed)
-    @type = Type.for(type, number_of_coconuts, voltage, nailed)
+    @type = Types.for(type, number_of_coconuts, voltage, nailed)
   end
 
   def speed
@@ -8,13 +8,9 @@ class Parrot
   end
 end
 
-class Type
+class Types
 
   class Base
-    def initialize
-
-    end
-
     private
       def base_speed
         12.0
@@ -24,7 +20,6 @@ class Type
         9.0
       end
   end
-
   class European < Base
     def speed
       return base_speed
