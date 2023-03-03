@@ -1,6 +1,6 @@
 class Parrot
 
-  def initialize type, number_of_coconuts, voltage, nailed
+  def initialize(type, number_of_coconuts, voltage, nailed)
     @type = type
     @number_of_coconuts = number_of_coconuts
     @voltage = voltage
@@ -22,7 +22,7 @@ class Parrot
 
   private
 
-  def compute_base_speed_for_voltage voltage
+  def compute_base_speed_for_voltage(voltage)
     [24.0, voltage * base_speed].min
   end
 
